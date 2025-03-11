@@ -1,31 +1,38 @@
 pipeline {
     agent any
     stages {
+        stage('Clone repository') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/chiragintech/PES1UG22CS160_Jenkins.git']]
+                ])
+            }
+        }
+
         stage('Build') {
             steps {
-                sh 'g++ -o new new.cpp'
                 build 'PES1UG22CS160-1'
+                sh 'g++ main.cpp -o output'
             }
         }
+
         stage('Test') {
             steps {
-                sh './new'
+                sh './output'
             }
         }
+
         stage('Deploy') {
             steps {
-                sh 'git add . && git commit -m "New cpp file" && git push https://github.com/chiragintech/PES1UG22CS160_Jenkins.git HEAD:main'
+                echo 'deploy'
             }
         }
     }
+
     post {
-        always {
-            script {
-                currentBuild.result = currentBuild.result ?: 'SUCCESS'
-            }
-        }
         failure {
-            echo 'pipeline failed'
+            error 'Pipeline failed'
         }
     }
 }
