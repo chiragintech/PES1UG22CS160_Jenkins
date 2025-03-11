@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'git add . && git commit -m "New cpp file" && git push origin HEAD:main'
+                sh 'git add . && git commit -m "New cpp file" && git push https://github.com/chiragintech/PES1UG22CS160_Jenkins.git HEAD:main'
             }
         }
     }
