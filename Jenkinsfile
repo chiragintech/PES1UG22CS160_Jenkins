@@ -1,27 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Clone repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/chiragintech/PES1UG22CS160_Jenkins.git'
-            }
-        }
-
         stage('Build') {
             steps {
+                sh 'g++ -o new new.cpp'
                 build 'PES1UG22CS160-1'
-                sh 'g++ new.cpp -o output'
-
             }
         }
         stage('Test') {
             steps {
-                sh './output'
-
+                sh './new'
             }
         }
         stage('Deploy') {
-            echo 'Deploying the application...'
+            steps {
+                sh 'git add . && git commit -m "New cpp file" && git push'
+            }
         }
     }
     post {
