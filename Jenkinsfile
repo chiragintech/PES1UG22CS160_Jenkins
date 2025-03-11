@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'g++ -o new new.cpp'
-                sh 'jenkins build PES1UG22CS160-1'
+                sh 'curl -X POST http://localhost:8080/job/PES1UG22CS160-1/build'
             }
         }
         stage('Test') {
