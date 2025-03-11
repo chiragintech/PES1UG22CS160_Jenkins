@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'git add . && git commit -m "New cpp file" && git push'
+                sh 'git add . && git commit -m "New cpp file" && git push origin HEAD:main'
             }
         }
     }
