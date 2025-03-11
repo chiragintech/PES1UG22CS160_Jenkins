@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'git config --global user.email "chiragasha3@gmail.com" && git config --global user.name "chiragintech" && git add . && git commit -m "New cpp file" && git push'
+                sh 'git config --global user.email "chiragasha3@gmail.com" && git config --global user.name "chiragintech" && git add . && git commit -m "New cpp file" && git push origin HEAD:main'
             }
         }
     }
